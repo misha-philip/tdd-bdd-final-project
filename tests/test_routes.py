@@ -243,7 +243,7 @@ class TestProductRoutes(TestCase):
         category = products[0].category
         found = [product for product in products if product.category == category]
         found_count = len(found)
-        logginf.debug(f'the count of the found categories if {found_count}')
+        logging.debug(f'the count of the found categories if {found_count}')
 
         #test for variables
         response = self.client.get(BASE_URL, query_string=f'category={category.name}')
@@ -264,13 +264,13 @@ class TestProductRoutes(TestCase):
         available_count = len(available_products)
         #test for availability
         response = self.client.get(
-            BASE_URL, query_string='available=ture'
+            BASE_URL, query_string='available=true'
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         data = response.get_json()
         self.assertEqual(len(data), available_count)
         # check the data just to be sure
-        for product in products:
+        for product in data:
             self.assertEqual(product['available'], True)
 
     ######################################################################

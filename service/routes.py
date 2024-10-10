@@ -23,7 +23,7 @@ from flask import url_for  # noqa: F401 pylint: disable=unused-import
 from service.models import Product
 from service.common import status  # HTTP Status Codes
 from . import app
-
+from service.models import  Category
 
 ######################################################################
 # H E A L T H   C H E C K
@@ -115,7 +115,7 @@ def list_products():
         products = Product.find_by_category(category_value)
 
     elif available:
-        app.logger.inf("Find by availability: %s", availability)
+        app.logger.info("Find by availability: %s", available)
         available_value = available.lower() in ['True', 'true', 'yes', '1']
         products = Product.find_by_availability(available_value)
     else:
